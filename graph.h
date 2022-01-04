@@ -11,12 +11,15 @@ typedef struct edge_ {
 
 
 typedef struct GRAPH_NODE_ {
+    pnode node;
     int node_num;
+    int weight;
+    int isUse;
     pedge edges;
-    struct GRAPH_NODE_ *next;
-} node, *pnode;
+    struct GRAPH_NODE_ *next ,*dad;
+} node, Dnode, *pDnode, *pnode;
 
-typedef struct Dijkstra_Node
+/*typedef struct Dijkstra_Node
 {
     pnode node;
     struct Dijkstra_Node *dad;
@@ -24,7 +27,7 @@ typedef struct Dijkstra_Node
     int isUse;
     struct Dijkstra_Node *next;
 } Dnode, *pDnode;
-
+*/
 void build_graph_cmd(pnode *head);
 void insert_node_cmd(pnode *head);
 void delete_node_cmd(pnode *head);

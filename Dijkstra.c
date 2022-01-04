@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "graph.h"
 
+
 pDnode buildDijkstra_NodeList(pnode start, int src)
 {
     pDnode head = NULL;
@@ -13,7 +14,8 @@ pDnode buildDijkstra_NodeList(pnode start, int src)
         {
             return NULL;
         }
-        
+        //reset src node to 0;
+
         (*index)->node = start;
         if (start->node_num == src)
         {
