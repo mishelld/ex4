@@ -16,6 +16,15 @@ typedef struct GRAPH_NODE_ {
     struct GRAPH_NODE_ *next;
 } node, *pnode;
 
+typedef struct Dijkstra_Node
+{
+    pnode node;
+    struct Dijkstra_Node *dad;
+    int weight;
+    int isUse;
+    struct Dijkstra_Node *next;
+} Dnode, *pDnode;
+
 void build_graph_cmd(pnode *head);
 void insert_node_cmd(pnode *head);
 void delete_node_cmd(pnode *head);
