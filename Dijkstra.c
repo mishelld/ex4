@@ -104,13 +104,25 @@ return -1;
 
 }*/
  pDnode list = buildDijkstra_NodeList(head, src);
+ pDnode list1 = buildDijkstra_NodeList(head, src);
     pDnode u = minInList(list);
     while (u != NULL)
     {
         pedge edgeIndex = u->node->edges;
         while (edgeIndex != NULL)
         {
-            pDnode v = getPDnode(list, edgeIndex->endpoint->node_num);
+           pDnode v= NULL;
+           list = list1;
+           int d = edgeIndex->endpoint->node_num;
+           while (list != NULL)
+           {
+           if (list->node->node_num == d)
+             {
+            v = list;
+              }
+             list = list->next;
+          }
+  
             int newDist = u->value + edgeIndex->weight;
             if (v->value > newDist)
             {
@@ -119,16 +131,17 @@ return -1;
             }
             edgeIndex = edgeIndex->next;
         }
-        u = minInList(list);
+        
+        u = minInList(list1);
     }
-    pDnode l = list;
-    while (list != NULL)
+    pDnode l = NULL;
+    while (list1 != NULL)
     {
-        if (list->node->node_num == dest)
+        if (list1->node->node_num == dest)
         {
-            l = list;
+            l = list1;
         }
-        list = list->next;
+        list1 = list1->next;
     }
     
     int dis = l->value;
