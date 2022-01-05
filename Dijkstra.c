@@ -41,24 +41,6 @@ void deleteList(pDnode list) {
     }
 }
 
-pDnode minInList(pDnode list)
-{
-    pDnode an = NULL;
-    while (list != NULL)
-    { 
-        //if head not visited , and the heads value is smaller then inifiny 
-        if (!list->visited && list->value < infinity && (an == NULL || an->value < list->value))
-        {
-            an = list;
-        }
-        list = list->next;
-    }
-    if (an != NULL)
-    {
-        an->visited = 1;
-    }
-    return an;
-}
 int shortsPath_cmd(pnode head, int src, int dest)
 {  /* pnode s = NULL;
     pnode index = head;
@@ -137,8 +119,6 @@ return -1;
             }
             edgeIndex = edgeIndex->next;
         }
-        //
-        //u = minInList(list1);
     list = list1;
     pDnode an = NULL;
     while (list != NULL)
@@ -173,7 +153,19 @@ return -1;
     if(dis == infinity){
         dis= -1;
     }
-    deleteList(list);
+    //deleteList(list);
+     while (list != NULL)
+    {
+        pDnode temp = list;
+        list = list->next;
+        free(temp);
+    }
+     while (list1 != NULL)
+    {
+        pDnode temp = list1;
+        list1 = list1->next;
+        free(temp);
+    }
     return dis;
     
 }
