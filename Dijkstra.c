@@ -32,15 +32,6 @@ pDnode buildDijkstra_NodeList(pnode start, int src)
     }
     return head;
 }
-void deleteList(pDnode list) {
-    while (list != NULL)
-    {
-        pDnode temp = list;
-        list = list->next;
-        free(temp);
-    }
-}
-
 int shortsPath_cmd(pnode head, int src, int dest)
 {  /* pnode s = NULL;
     pnode index = head;
@@ -74,8 +65,42 @@ while(h!=NULL){
 return -1;
 
 }*/
- pDnode list = buildDijkstra_NodeList(head, src);
- pDnode list1 = buildDijkstra_NodeList(head, src);
+ pDnode list = NULL;
+  pDnode list1 = NULL;
+//
+pDnode head1 = NULL;
+    pDnode *index = &head1;
+    while (head != NULL)
+    {
+        (*index) = (pDnode)malloc(sizeof(Dnode));
+        if ((*index) == NULL)
+        {
+            (*index) =  NULL;
+        }
+        (*index)->node = head;
+        if (head->node_num == src)
+        {
+            (*index)->prev = (*index);
+            (*index)->value = 0;
+        }
+        else
+        {
+            (*index)->prev = NULL;
+            (*index)->value = infinity;
+        }
+        (*index)->visited = 0;
+        (*index)->next = NULL;
+        index = &((*index)->next);
+        head = head->next;
+    }
+    list =  head1;
+    list1 = head1;
+
+
+
+//
+
+
     pDnode u = NULL;
     //
     pDnode ans = NULL;
@@ -153,7 +178,6 @@ return -1;
     if(dis == infinity){
         dis= -1;
     }
-    //deleteList(list);
      while (list != NULL)
     {
         pDnode temp = list;
