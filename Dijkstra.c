@@ -43,21 +43,21 @@ void deleteList(pDnode list) {
 
 pDnode minInList(pDnode list)
 {
-    pDnode ans = NULL;
+    pDnode an = NULL;
     while (list != NULL)
     { 
         //if head not visited , and the heads value is smaller then inifiny 
-        if (!list->visited && list->value < infinity && (ans == NULL || ans->value < list->value))
+        if (!list->visited && list->value < infinity && (an == NULL || an->value < list->value))
         {
-            ans = list;
+            an = list;
         }
         list = list->next;
     }
-    if (ans != NULL)
+    if (an != NULL)
     {
-        ans->visited = 1;
+        an->visited = 1;
     }
-    return ans;
+    return an;
 }
 int shortsPath_cmd(pnode head, int src, int dest)
 {  /* pnode s = NULL;
@@ -138,7 +138,25 @@ return -1;
             edgeIndex = edgeIndex->next;
         }
         //
-        u = minInList(list1);
+        //u = minInList(list1);
+    list = list1;
+    pDnode an = NULL;
+    while (list != NULL)
+    { 
+        //if head not visited , and the heads value is smaller then inifiny 
+        if (!list->visited && list->value < infinity && (an == NULL || an->value < list->value))
+        {
+            an = list;
+        }
+        list = list->next;
+    }
+    if (an != NULL)
+    {
+        an->visited = 1;
+    }
+    u =  an;
+    
+
     }
     pDnode l = NULL;
     while (list1 != NULL)
