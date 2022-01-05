@@ -40,18 +40,7 @@ void deleteList(pDnode list) {
         free(temp);
     }
 }
-pDnode getPDnode(pDnode list, int want)
-{
-    while (list != NULL)
-    {
-        if (list->node->node_num == want)
-        {
-            return list;
-        }
-        list = list->next;
-    }
-    return NULL;
-}
+
 pDnode minInList(pDnode list)
 {
     pDnode ans = NULL;
@@ -105,7 +94,24 @@ return -1;
 }*/
  pDnode list = buildDijkstra_NodeList(head, src);
  pDnode list1 = buildDijkstra_NodeList(head, src);
-    pDnode u = minInList(list);
+    pDnode u = NULL;
+    //
+    pDnode ans = NULL;
+    while (list != NULL)
+    { 
+        //if head not visited , and the heads value is smaller then inifiny 
+        if (!list->visited && list->value < infinity && (ans == NULL || ans->value < list->value))
+        {
+            ans = list;
+        }
+        list = list->next;
+    }
+    if (ans != NULL)
+    {
+        ans->visited = 1;
+    }
+    u =  ans;
+    //
     while (u != NULL)
     {
         pedge edgeIndex = u->node->edges;
@@ -131,7 +137,7 @@ return -1;
             }
             edgeIndex = edgeIndex->next;
         }
-        
+        //
         u = minInList(list1);
     }
     pDnode l = NULL;
