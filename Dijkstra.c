@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "graph.h"
-int shortsPath_cmd(pnode head, int src, int dest)
+/*int shortsPath_cmd(pnode head, int src, int dest)
 {  
  pDnode list = NULL;
   pDnode list1 = NULL;
@@ -132,7 +132,7 @@ pDnode head1 = NULL;
     
 }
 
-/* pnode s = NULL;
+ pnode s = NULL;
     pnode index = head;
     while (index != NULL)
     {
