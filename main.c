@@ -5,7 +5,6 @@ int weight = infinity;
 int size;
 pnode graph;
 
-
 void build_graph_cmd(pnode *head)
 {
     deleteGraph_cmd(head);
@@ -19,7 +18,6 @@ void build_graph_cmd(pnode *head)
         insert_node_cmd(head);
     }
 }
-
 pnode getNode(pnode *head, int id)
 {
     pnode index = *head;
@@ -383,25 +381,6 @@ pDnode head1 = NULL;
     return dis;
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
