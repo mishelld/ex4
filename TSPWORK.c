@@ -11,24 +11,7 @@ void swap(int *a, int *b)
     *a = *b;
     *b = temp;
 }
-void calculateWeight(int *arr)
-{
-    int tempWeight = 0;
-    for (int i = 0; i < size - 1; i++)
-    {
-        int dis = shortsPath_cmd(graph, arr[i], arr[i + 1]);
-        if (dis == -1)
-        {
-            tempWeight = infinity;
-            return;
-        }
-        tempWeight += dis;
-    }
-    if (tempWeight < weight)
-    {
-        weight = tempWeight;
-    }
-}
+
 void tso(int *arr,pnode head){
     int temp = 0;
     for(int i =0; i<size-1;i++){
@@ -49,7 +32,6 @@ void permutations(int start, int *arr)
 {
     if (start == size - 1)
     {
-        //calculateWeight(arr);
         int tempWeight = 0;
     for (int i = 0; i < size - 1; i++)
     {
@@ -69,7 +51,6 @@ void permutations(int start, int *arr)
     }
     for (int i = 0; i < size; ++i)
     {
-       // int *copy = copyArr(arr);
      int *copy = (int *)malloc(sizeof(int) * size);
     if (copy == NULL)
     {
@@ -79,7 +60,11 @@ void permutations(int start, int *arr)
     {
         copy[i] = arr[i];
     }
-        swap(&copy[start], &copy[i]);
+       // swap(&copy[start], &copy[i]);
+        int temp = copy[start];
+        copy[start] = copy[i];
+        copy[i] = temp;
+
         permutations(start + 1, copy);
         free(copy);
     }
