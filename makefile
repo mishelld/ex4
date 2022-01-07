@@ -3,13 +3,9 @@ CC = gcc
 AR = ar
 FLAGS= -Wall -Werror -g
 all: graph 
-graph: main.o graph.a
-	$(CC) $(FLAGS) -o graph main.o graph.a
-graph.a: graph.o 
-	$(AR) -rcs graph.a graph.o 
+graph: main.o 
+	$(CC) $(FLAGS) -o graph main.o 
 main.o: main.c graph.h
 	$(CC) $(FLAGS) -c main.c
-graph.o: graph.c graph.h
-	$(CC) $(FLAGS) -c graph.c
 clean:
 	rm -f *.o *.a graph
