@@ -5,28 +5,6 @@ int weight = infinity;
 int size;
 pnode graph;
 
-void swap(int *a, int *b)
-{
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-void tso(int *arr,pnode head){
-    int temp = 0;
-    for(int i =0; i<size-1;i++){
-    int dist = shortsPath_cmd(head,arr[i],arr[i+1]);
-    if(dist != -1){
-        temp = temp + dist;
-    }
-    else{
-       temp = infinity;
-    }
-    }
-    if(temp<infinity){
-        weight = temp;
-    }
-}
 
 void permutations(int start, int *arr)
 {
@@ -51,39 +29,24 @@ void permutations(int start, int *arr)
     }
     for (int i = 0; i < size; ++i)
     {
-     int *copy = (int *)malloc(sizeof(int) * size);
-    if (copy == NULL)
+     int *copy1 = (int *)malloc(sizeof(int) * size);
+    if (copy1 == NULL)
     {
-        copy =  NULL;
+        copy1 =  NULL;
     }
     for (int i = 0; i < size; i++)
     {
-        copy[i] = arr[i];
+        copy1[i] = arr[i];
     }
        // swap(&copy[start], &copy[i]);
-        int temp = copy[start];
-        copy[start] = copy[i];
-        copy[i] = temp;
+        int temp = copy1[start];
+        copy1[start] = copy1[i];
+        copy1[i] = temp;
 
-        permutations(start + 1, copy);
-        free(copy);
+        permutations(start + 1, copy1);
+        free(copy1);
     }
 }
- /* int i = 0;
-    int j = size-1;
-    while (i < size || j>0)
-    {
-        if (i == j)
-    {
-        calculateWeight(arr);
-        return;
-    }
-        int *copy = copyArr(arr);
-        swap(&copy[i], &copy[j]);
-        free(copy);
-        i++;
-        j--;
-    }*/
 int TSP_cmd(pnode head)
 {
     weight = infinity;
