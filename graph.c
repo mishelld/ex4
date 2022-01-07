@@ -2,11 +2,9 @@
 #include <stdlib.h>
 #include "graph.h"
 
-int weight = infinity;
+/*int weight = infinity;
 int size;
 pnode graph;
-
-
 
 
 void build_graph_cmd(pnode *head)
@@ -294,12 +292,6 @@ pDnode head1 = NULL;
     }
     list =  head1;
     list1 = head1;
-
-
-
-//
-
-
     pDnode u = NULL;
     //
     pDnode ans = NULL;
@@ -391,36 +383,5 @@ pDnode head1 = NULL;
     }
     return dis;
     
-}
+}*/
 
-/* pnode s = NULL;
-    pnode index = head;
-    while (index != NULL)
-    {
-        if (index->node_num == src)
-        {
-            s = index;
-        }
-        index = index->next;
-    }
-   
-    while(list!=NULL){
-        pedge ed = list->edges;
-        while(ed!=NULL){
-            if(ed->weight< ed->endpoint->value  && !ed->endpoint->visited){
-                ed->endpoint->value = ed->weight;
-        }
-         ed=ed->next;
-    }
-    list= list->next;
-
-}
-pnode h = head;
-while(h!=NULL){
-    if(list->node_num==dest){
-        return list->value;
-    }
-    list = list->next;
-}
-return -1;
-*/
