@@ -37,6 +37,15 @@ pnode getNode(pnode *node, int id_num){
     return NULL;
 }
 
+
+int check2(int flag){
+    int b = 0;
+    if(flag != 0 && flag != EOF){
+        b = 1;
+    }
+    return b;
+}
+
 void insert_node_cmd(pnode *head){
     int id_num = -1;
     scanf("%d", &id_num);
@@ -63,7 +72,8 @@ void insert_node_cmd(pnode *head){
     pedge *edge = &(source->edges);
     int destination = -1;
     int flag = scanf("%d", &destination);
-    while (flag != 0 && flag != EOF){
+    int b = check2(flag);
+    while (b == 1){
         pnode dest = getNode(head, destination);
         int value = -1;
         scanf("%d", &value);
@@ -86,8 +96,10 @@ void insert_node_cmd(pnode *head){
         (*edge)->next = NULL;
         edge = &((*edge)->next);
         flag = scanf("%d", &destination);
+        b = check2(flag);
     }
 }
+
 
 
 
