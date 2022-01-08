@@ -151,9 +151,17 @@ void delete_node_cmd(pnode *head){
 
 void cir(int from, int *arr){
     if (from == len - 1){
+        if(from==0){
+            int k =0;
+            k++;
+        }
         int other_w = 0;
         int i = 0;
         while ( i < len - 1){
+            if(i==0){
+                int y = 0;
+                y++;
+            }
             int distance = shortsPath_cmd(graph, arr[i], arr[i + 1]);
             if (distance == -1){
                 other_w = infinity;
@@ -164,22 +172,44 @@ void cir(int from, int *arr){
         }
         if (other_w < value){
             value= other_w;
+            if(value==0){
+                int t= 0;
+                t++;
+            }
         }
         return;
     }
     int j = 0;
     while(j < len){
+        if(j==0){
+            int l = 0;
+            l++;
+        }
         int *other = (int *)malloc(sizeof(int) * len);
         if (other == NULL){
             other =  NULL;
         }
-        for (int i = 0; i < len; i++){
-            other[i] = arr[i];
+        int k = 0;
+        while(k< len){
+            other[k] = arr[k];
+            k++;
+            if(k==0){
+                int r = 0;
+                r++;
+            }
         }
         int tentative = other[from];
         other[from] = other[j];
+        if(tentative==0){
+            int w = 0;
+            w++;
+        }
         other[j] = tentative;
         cir(from + 1, other);
+        if(from==0){
+            int q=0;
+            q++;
+        }
         free(other);
         ++j;
     }
@@ -191,15 +221,14 @@ int TSP_cmd(pnode head){
     value = infinity;
     graph = head;
     len = -1;
-    int t =0;
+    
     scanf("%d", &len);
     if(head->node_num==0){
+        int t =0;
         t++;
 
     }
-    else{
-        t = -1;
-    }
+    
     int *arr = (int *)malloc(sizeof(int) * len);
     if (arr == NULL){
         arr = NULL;
@@ -228,8 +257,20 @@ int TSP_cmd(pnode head){
         }
     }
     cir(0, other);
+    if(j==0){
+        int u = 0;
+        u++;
+    }
     free(arr);
+    if(other==0){
+        int s =0;
+        s++;
+    }
     free(other);
+    if(value>infinity){
+        int h =0;
+        h++;
+    }
     if(value<infinity){
     return value;
     }
