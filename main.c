@@ -238,7 +238,7 @@ int shortsPath_cmd(pnode head, int src, int dest){
     pDnode second_list = NULL;
     pDnode firstNode = NULL;
     pDnode *ind = &firstNode;
-    while (head != NULL){
+    for (;head != NULL;head = head->next){
         (*ind) = (pDnode)malloc(sizeof(Dnode));
         if ((*ind) == NULL){
             (*ind) =  NULL;
@@ -255,17 +255,17 @@ int shortsPath_cmd(pnode head, int src, int dest){
         (*ind)->visited = 0;
         (*ind)->next = NULL;
         ind = &((*ind)->next);
-        head = head->next;
+       // ;
     }
     first_list =  firstNode;
     second_list = firstNode;
     pDnode flag = NULL;
     pDnode toReturn = NULL;
-    while (first_list != NULL){ 
+    for (;first_list != NULL;first_list = first_list->next){ 
         if (!first_list->visited && first_list->value < infinity && (toReturn == NULL || toReturn->value < first_list->value)){
             toReturn = first_list;
         }
-        first_list = first_list->next;
+        
     }
     if (toReturn != NULL){
         toReturn->visited = 1;
@@ -273,30 +273,29 @@ int shortsPath_cmd(pnode head, int src, int dest){
     flag =  toReturn;
     while (flag != NULL){
         pedge ind_edge = flag->node->edges;
-        while (ind_edge != NULL){
+        for (;ind_edge != NULL; ind_edge = ind_edge->next){
            pDnode flag2= NULL;
            first_list = second_list;
            int dist = ind_edge->endpoint->node_num;
-           while (first_list != NULL){
+           for (;first_list != NULL;first_list = first_list->next){
            if (first_list->node->node_num == dist){
             flag2 = first_list;
               }
-             first_list = first_list->next;
+             
           }
             int dist2 = flag->value + ind_edge->weight;
             if (flag2->value > dist2){
                 flag2->value = dist2;
                 flag2->prev = flag;
             }
-            ind_edge = ind_edge->next;
         }
         first_list = second_list;
         pDnode check = NULL;
-        while (first_list != NULL){ 
+        for(;first_list != NULL;first_list = first_list->next){ 
             if (!first_list->visited && first_list->value < infinity && (check == NULL || check->value < first_list->value)){
                 check = first_list;
             }
-            first_list = first_list->next;
+            
         }
         if (check != NULL){
             check->visited = 1;
@@ -304,24 +303,23 @@ int shortsPath_cmd(pnode head, int src, int dest){
         flag =  check;
     }
     pDnode check2 = NULL;
-    while (second_list != NULL){
+    for (;second_list != NULL;second_list = second_list->next){
         if (second_list->node->node_num == dest){
             check2 = second_list;
         }
-        second_list = second_list->next;
     }
     int distance = check2->value;
     if(distance == infinity){
         distance= -1;
     }
-    while (first_list != NULL){
+    for (;first_list != NULL;first_list = first_list->next){
         pDnode other = first_list;
-        first_list = first_list->next;
+        
         free(other);
     }
-    while (second_list != NULL){
+    for (;second_list != NULL;second_list = second_list->next){
         pDnode other1 = second_list;
-        second_list = second_list->next;
+        ;
         free(other1);
     }
     return distance;
