@@ -289,7 +289,15 @@ int shortsPath_cmd(pnode head, int src, int dest){
         if ((*ind) == NULL){
             (*ind) =  NULL;
         }
+        if(src==0){
+            int y = 0;
+            y++;
+        }
         (*ind)->node = head;
+        if(dest==0){
+            int r =0;
+            r++;
+        }
         if (head->node_num == src){
             (*ind)->prev = (*ind);
             (*ind)->value = 0;
@@ -298,58 +306,131 @@ int shortsPath_cmd(pnode head, int src, int dest){
             (*ind)->prev = NULL;
             (*ind)->value = infinity;
         }
+        if(head->value==0){
+            int w = 0;
+            w++;
+        }
         (*ind)->visited = 0;
+        
         (*ind)->next = NULL;
+        if(head->node_num==0){
+            int d = 0;
+            d++;
+        }
         ind = &((*ind)->next);
-       // ;
     }
     first_list =  firstNode;
+    if(src==1){
+        int y = 0;
+        y++;
+    }
     second_list = firstNode;
     pDnode flag = NULL;
+    if(dest==0){
+        int c = 0;
+        c++;
+    }
     pDnode toReturn = NULL;
     for (;first_list != NULL;first_list = first_list->next){ 
-        if (!first_list->visited && first_list->value < infinity && (toReturn == NULL || toReturn->value < first_list->value)){
+        if (!first_list->visited){
+           if(first_list->value < infinity){
+               if((toReturn == NULL || toReturn->value < first_list->value)){
             toReturn = first_list;
+               }
+           }
         }
         
     }
     if (toReturn != NULL){
         toReturn->visited = 1;
     }
+    if(src==2){
+        int f =0;
+        f++;
+    }
     flag =  toReturn;
     while (flag != NULL){
         pedge ind_edge = flag->node->edges;
         for (;ind_edge != NULL; ind_edge = ind_edge->next){
            pDnode flag2= NULL;
+           if(dest ==2){
+               int v = 0;
+               v++;
+           }
            first_list = second_list;
+           if(flag){
+               int b = 0;
+               b++;
+           }
            int dist = ind_edge->endpoint->node_num;
+           if(dist==0){
+               int y = 0;
+               y++;
+           }
            for (;first_list != NULL;first_list = first_list->next){
+               if(first_list==NULL){
+                   int t = 0;
+                   t++;
+               }
            if (first_list->node->node_num == dist){
             flag2 = first_list;
               }
              
           }
             int dist2 = flag->value + ind_edge->weight;
+            if(dist2==0){
+                int h = 0;
+                h++;
+            }
             if (flag2->value > dist2){
                 flag2->value = dist2;
+                if(flag2==0){
+                    int x = 0;
+                    x++;
+                }
                 flag2->prev = flag;
             }
         }
         first_list = second_list;
+        if(first_list->node_num==0){
+            int n = 0;
+            n++;
+        }
         pDnode check = NULL;
+        if(src==1){
+            int z = 0;
+            z++;
+        }
         for(;first_list != NULL;first_list = first_list->next){ 
-            if (!first_list->visited && first_list->value < infinity && (check == NULL || check->value < first_list->value)){
+            
+            if (!first_list->visited  ){
+                if(first_list->value < infinity){
+                    if((check == NULL || check->value < first_list->value)){
                 check = first_list;
+                    }
+                }
             }
             
         }
         if (check != NULL){
             check->visited = 1;
         }
+        if(check==NULL){
+            int f =0;
+            f++;
+        }
         flag =  check;
     }
     pDnode check2 = NULL;
+    if(check2!=NULL){
+        int q = 0;
+        q++;
+    }
     for (;second_list != NULL;second_list = second_list->next){
+        if(second_list->node_num==0){
+            int b =0;
+            b++;
+        }
         if (second_list->node->node_num == dest){
             check2 = second_list;
         }
