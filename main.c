@@ -208,15 +208,19 @@ int TSP_cmd(pnode head){
     if (arr == NULL){
         arr = NULL;
     }
-    for (int i = 0; i < len; i++){
+    int i = 0;
+    while( i < len){
         scanf("%d", &arr[i]);
+        i++;
     }
      int *other = (int *)malloc(sizeof(int) * len);
     if (other == NULL){
         other =  NULL;
     }
-    for (int i = 0; i < len; i++){
-        other[i] = arr[i];
+    int j = 0;
+    while(j < len){
+        other[j] = arr[j];
+        j++;
     }
     permutations(0, other);
     free(arr);
