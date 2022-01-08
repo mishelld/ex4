@@ -19,12 +19,13 @@ typedef struct GRAPH_NODE_ {
     struct GRAPH_NODE_ *next ,*prev;
 } node, Dnode, *pDnode, *pnode;
 
-void newGraph(pnode *head);
-void addNode(pnode *head);
-void deleteNode(pnode *head);
-void print(pnode head); //for self debug
-void deleteGraph(pnode* head);
-int findShortsPath(pnode head, int src, int dest);
-int TSP(pnode head);
+void build_graph_cmd(pnode *head);
+void insert_node_cmd(pnode *head);
+void delete_node_cmd(pnode *head);
+void printGraph_cmd(pnode head); //for self debug
+void deleteGraph_cmd(pnode* head);
+int shortsPath_cmd(pnode head, int src, int dest);
+int TSP_cmd(pnode head);
+//pnode getNode(pnode *head, int id);
 
 #endif
