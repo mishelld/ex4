@@ -6,15 +6,15 @@ int len;
 pnode graph;
 
 
-void newGraph(pnode *node){
-    deleteGraph(node);
+void build_graph_cmd(pnode *head){
+    deleteGraph_cmd(head);
     int len = 0;
     char c = 'B';
     scanf("%d", &len);
     scanf("%c", &c);
     for (int i = 0; i <= len-1 ; i++){
         scanf("%c", &c);
-        addNode(node);
+        insert_node_cmd(head);
     }
 }
 
@@ -31,19 +31,19 @@ pnode getNode(pnode *node, int id_num){
 }
 
 
-void addNode(pnode *node){
+void insert_node_cmd(pnode *head){
     int id_num = -1;
     scanf("%d", &id_num);
-    pnode source = getNode(node, id_num);
+    pnode source = getNode(head, id_num);
     if (source == NULL){
         source = (pnode)malloc(sizeof(node));
         if (source == NULL){
             return;
         }
         source->node_num = id_num;
-        source->next = *node;
+        source->next = *head;
         source->edges = NULL;
-        *node = source;
+        *head = source;
     }
     else{
         pedge ind = source->edges;
@@ -58,7 +58,7 @@ void addNode(pnode *node){
     int destination = -1;
     int flag = scanf("%d", &destination);
     while (flag != 0 && flag != EOF){
-        pnode dest = getNode(node, destination);
+        pnode dest = getNode(head, destination);
         int value = -1;
         scanf("%d", &value);
         if (dest == NULL){
@@ -68,8 +68,8 @@ void addNode(pnode *node){
             }
             dest->node_num = destination;
             dest->edges = NULL;
-            dest->next = *node;
-            *node = dest;
+            dest->next = *head;
+            *head = dest;
         }
         *edge = (pedge)malloc(sizeof(edge));
         if ((*edge) == NULL){
@@ -85,8 +85,8 @@ void addNode(pnode *node){
 
 
 
-void print(pnode node){
-    pnode ind_node = node;
+void printGraph_cmd(pnode head){
+    pnode ind_node = head;
     while (ind_node  != NULL){
         printf("Node %d: ", ind_node ->node_num);
         pedge ind_edge = ind_node ->edges;
@@ -101,8 +101,8 @@ void print(pnode node){
 
 
 
-void deleteGraph(pnode *node){
-    pnode ind_node = *node;
+void deleteGraph_cmd(pnode *head){
+    pnode ind_node = *head;
     while (ind_node != NULL){
         pedge ind_edge = ind_node->edges;
         while (ind_edge != NULL){
@@ -114,15 +114,15 @@ void deleteGraph(pnode *node){
         ind_node = ind_node->next;
         free(other);
     }
-    *node = NULL;
+    *head = NULL;
 }
 
 
 
-void deleteNode(pnode *node){
+void delete_node_cmd(pnode *head){
     int flag = -1;
     scanf("%d", &flag);
-    pnode ind_node = *node;
+    pnode ind_node = *head;
     pnode befor = NULL;
     while (ind_node != NULL){
         if (ind_node->next != NULL && ind_node->next->node_num == flag){
@@ -169,7 +169,7 @@ void permutations(int from, int *arr){
     if (from == len - 1){
         int other_w = 0;
         for (int i = 0; i < len - 1; i++){
-            int distance = findShortsPath(graph, arr[i], arr[i + 1]);
+            int distance = shortsPath_cmd(graph, arr[i], arr[i + 1]);
             if (distance == -1){
                 other_w = infinity;
                 return;
@@ -199,9 +199,9 @@ void permutations(int from, int *arr){
 
 
 
-int TSP(pnode node){
+int TSP_cmd(pnode head){
     value = infinity;
-    graph = node;
+    graph = head;
     len = -1;
     scanf("%d", &len);
     int *arr = (int *)malloc(sizeof(int) * len);
@@ -229,18 +229,18 @@ int TSP(pnode node){
 
 
 
-int findShortsPath(pnode node, int src, int dest){  
+int shortsPath_cmd(pnode head, int src, int dest){  
     pDnode first_list = NULL;
     pDnode second_list = NULL;
     pDnode firstNode = NULL;
     pDnode *ind = &firstNode;
-    while (node != NULL){
+    while (head != NULL){
         (*ind) = (pDnode)malloc(sizeof(Dnode));
         if ((*ind) == NULL){
             (*ind) =  NULL;
         }
-        (*ind)->node = node;
-        if (node->node_num == src){
+        (*ind)->node = head;
+        if (head->node_num == src){
             (*ind)->prev = (*ind);
             (*ind)->value = 0;
         }
@@ -251,7 +251,7 @@ int findShortsPath(pnode node, int src, int dest){
         (*ind)->visited = 0;
         (*ind)->next = NULL;
         ind = &((*ind)->next);
-        node = node->next;
+        head = head->next;
     }
     first_list =  firstNode;
     second_list = firstNode;
@@ -331,25 +331,25 @@ int main(){
     char c = '\0';
     while (scanf("%c", &c) != EOF){
         if (c == 'A'){
-            newGraph(node);
+            build_graph_cmd(node);
         }
         else if (c == 'B'){
-            addNode(node);
+            insert_node_cmd(node);
         }
         else if (c == 'D'){
-            deleteNode(node);
+            delete_node_cmd(node);
         }
         else if (c == 'S'){
             int source = -1, dest = -1;
             scanf("%d %d", &source, &dest);
-            int distance = findShortsPath(*node,source, dest);
+            int distance = shortsPath_cmd(*node,source, dest);
             printf("Dijsktra shortest path: %d \n",distance);
         }
         else if (c == 'T') {
-            int value = TSP(*node);
+            int value = TSP_cmd(*node);
             printf("TSP shortest path: %d \n", value);
         }
     }
-    deleteGraph(node);
+    deleteGraph_cmd(node);
     return 0;
 }
