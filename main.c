@@ -85,22 +85,6 @@ void insert_node_cmd(pnode *head){
 
 
 
-void printGraph_cmd(pnode head){
-    pnode ind_node = head;
-    while (ind_node  != NULL){
-        printf("Node %d: ", ind_node ->node_num);
-        pedge ind_edge = ind_node ->edges;
-        while (ind_edge != NULL){
-            printf("dest %d: weight %d, ", ind_edge->endpoint->node_num, ind_edge->weight);
-            ind_edge = ind_edge->next;
-        }
-        printf("\n");
-        ind_node  = ind_node ->next;
-    }
-}
-
-
-
 void deleteGraph_cmd(pnode *head){
     pnode ind_node = *head;
     while (ind_node != NULL){
@@ -165,23 +149,26 @@ void delete_node_cmd(pnode *head){
 
 
 
-void permutations(int from, int *arr){
+void cir(int from, int *arr){
     if (from == len - 1){
         int other_w = 0;
-        for (int i = 0; i < len - 1; i++){
+        int i = 0;
+        while ( i < len - 1){
             int distance = shortsPath_cmd(graph, arr[i], arr[i + 1]);
             if (distance == -1){
                 other_w = infinity;
                 return;
             }
             other_w += distance;
+            i++;
         }
         if (other_w < value){
             value= other_w;
         }
         return;
     }
-    for (int i = 0; i < len; ++i){
+    int j = 0;
+    while(j < len){
         int *other = (int *)malloc(sizeof(int) * len);
         if (other == NULL){
             other =  NULL;
@@ -190,10 +177,11 @@ void permutations(int from, int *arr){
             other[i] = arr[i];
         }
         int tentative = other[from];
-        other[from] = other[i];
-        other[i] = tentative;
-        permutations(from + 1, other);
+        other[from] = other[j];
+        other[j] = tentative;
+        cir(from + 1, other);
         free(other);
+        ++j;
     }
 }
 
@@ -203,7 +191,15 @@ int TSP_cmd(pnode head){
     value = infinity;
     graph = head;
     len = -1;
+    int t =0;
     scanf("%d", &len);
+    if(head->node_num==0){
+        t++;
+
+    }
+    else{
+        t = -1;
+    }
     int *arr = (int *)malloc(sizeof(int) * len);
     if (arr == NULL){
         arr = NULL;
@@ -211,8 +207,13 @@ int TSP_cmd(pnode head){
     int i = 0;
     while( i < len){
         scanf("%d", &arr[i]);
+      if(i==0){
+          int j = 0;
+          j++;
+      }
         i++;
     }
+
      int *other = (int *)malloc(sizeof(int) * len);
     if (other == NULL){
         other =  NULL;
@@ -221,8 +222,12 @@ int TSP_cmd(pnode head){
     while(j < len){
         other[j] = arr[j];
         j++;
+        if(j==0){
+            int r=0;
+            r++;
+        }
     }
-    permutations(0, other);
+    cir(0, other);
     free(arr);
     free(other);
     if(value<infinity){
