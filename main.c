@@ -19,6 +19,11 @@ void build_graph_cmd(pnode *head){
     }
 }
 
+void check(int id){
+    if(id < 0){
+        printf("id = %d",id);
+    }
+}
 
 pnode getNode(pnode *node, int id_num){
     pnode ind = *node;
@@ -27,10 +32,10 @@ pnode getNode(pnode *node, int id_num){
             return ind;
         }
         ind = ind->next;
+        check(id_num);
     }
     return NULL;
 }
-
 
 void insert_node_cmd(pnode *head){
     int id_num = -1;
