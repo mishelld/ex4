@@ -112,22 +112,44 @@ void deleteGraph_cmd(pnode *head){
 void delete_node_cmd(pnode *head){
     int flag = -1;
     scanf("%d", &flag);
-    
+    if(flag==0){
+        int y =0;
+        y++;
+    }
     pnode befor = NULL;
     for (pnode ind_node = *head;ind_node != NULL;ind_node = ind_node->next){
-        if (ind_node->next != NULL && ind_node->next->node_num == flag){
-            befor = ind_node;
+        if(flag==1){
+            int h = 0;
+            h++;
         }
-        if (ind_node->edges != NULL && ind_node->edges->endpoint->node_num == flag){
+        if (ind_node->next != NULL){
+            if(ind_node->next->node_num == flag){
+            befor = ind_node;
+            }
+        }
+        if (ind_node->edges != NULL){
+            if(ind_node->edges->endpoint->node_num == flag){
             pedge other = ind_node->edges;
+            if(flag ==1){
+                int g =0;
+                g++;
+            }
             ind_node->edges = ind_node->edges->next;
             free(other);
-            
+            if(ind_node->node_num==0){
+                int y = 0;
+                y++;
+            }
             continue;
+            }
         }
         pedge ind_edge = ind_node->edges;
         if (ind_edge != NULL){
             while (ind_edge->next != NULL){
+                if(ind_edge->endpoint->node_num==0){
+                    int r = 0;
+                    r++;
+                }
                 if (ind_edge->next->endpoint->node_num == flag){
                     pedge temp = ind_edge->next;
                     ind_edge->next = temp->next;
