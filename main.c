@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #ifndef GRAPH_
 #define GRAPH_
-#define infinity 100000
+#define big 100000
 typedef struct GRAPH_NODE_ *pnode;;
 
 typedef struct edge_ {
@@ -21,19 +21,15 @@ typedef struct GRAPH_NODE_ {
     struct GRAPH_NODE_ *next ,*prev;
 } node, Dnode, *pDnode, *pnode;
 
-void build_graph_cmd(pnode *head);
 void insert_node_cmd(pnode *head);
-void delete_node_cmd(pnode *head);
-void printGraph_cmd(pnode head);
-void deleteGraph_cmd(pnode* head);
 int shortsPath_cmd(pnode head, int src, int dest);
 int TSP_cmd(pnode head);
 
 #endif
 
-int value = infinity;
+int value = big;
 int len;
-pnode graph;
+pnode filed;
 
 
 
@@ -172,9 +168,9 @@ void cir(int from, int *arr){
                 int y = 0;
                 y++;
             }
-            int distance = shortsPath_cmd(graph, arr[i], arr[i + 1]);
+            int distance = shortsPath_cmd(filed, arr[i], arr[i + 1]);
             if (distance == -1){
-                other_w = infinity;
+                other_w = big;
                 return;
             }
             other_w += distance;
@@ -228,8 +224,8 @@ void cir(int from, int *arr){
 
 
 int TSP_cmd(pnode head){
-    value = infinity;
-    graph = head;
+    value = big;
+    filed = head;
     len = -1;
     
     scanf("%d", &len);
@@ -277,11 +273,11 @@ int TSP_cmd(pnode head){
         s++;
     }
     free(other);
-    if(value>infinity){
+    if(value > big){
         int h =0;
         h++;
     }
-    if(value<infinity){
+    if(value < big){
     return value;
     }
     return -1;
@@ -314,7 +310,7 @@ int shortsPath_cmd(pnode head, int src, int dest){
         }
         else{
             (*ind)->prev = NULL;
-            (*ind)->value = infinity;
+            (*ind)->value = big;
         }
         if(head->value==0){
             int w = 0;
@@ -343,7 +339,7 @@ int shortsPath_cmd(pnode head, int src, int dest){
     pDnode toReturn = NULL;
     for (;first_list != NULL;first_list = first_list->next){ 
         if (!first_list->visited){
-           if(first_list->value < infinity){
+           if(first_list->value < big){
                if((toReturn == NULL || toReturn->value < first_list->value)){
             toReturn = first_list;
                }
@@ -414,7 +410,7 @@ int shortsPath_cmd(pnode head, int src, int dest){
         for(;first_list != NULL;first_list = first_list->next){ 
             
             if (!first_list->visited  ){
-                if(first_list->value < infinity){
+                if(first_list->value < big){
                     if((check == NULL || check->value < first_list->value)){
                 check = first_list;
                     }
@@ -446,11 +442,11 @@ int shortsPath_cmd(pnode head, int src, int dest){
         }
     }
     int distance = check2->value;
-    if(distance != infinity){
+    if(distance != big){
         int j = 0;
         j++;
     }
-    if(distance == infinity){
+    if(distance == big){
         distance= -1;
     }
     for (;first_list != NULL;first_list = first_list->next){
@@ -475,17 +471,19 @@ int shortsPath_cmd(pnode head, int src, int dest){
 
 
 int main(){
+    // The function is responsible for constructing the filed
     pnode other = NULL;
     pnode *node = &other;
     char c = '\0';
     while (scanf("%c", &c) != EOF){
         if (c == 'A'){
+            // Delete everything
          for (pnode ind_node = *node;ind_node != NULL;ind_node = ind_node->next){
         if(ind_node->node_num==0){
             int y = 0;
             y++;
         }
-       
+       // add all nodes
         for( pedge ind_edge = ind_node->edges;ind_edge != NULL; ind_edge = ind_edge->next){
             if(ind_edge->endpoint->node_num==0){
                 int w = 0;
@@ -495,7 +493,7 @@ int main(){
            
             free(other);
         }
-        
+        // the function checks the Id number
         pnode other = ind_node;
         
         free(other);
@@ -509,6 +507,7 @@ int main(){
     scanf("%c", &c);
     if(index==len){
         int h =0;
+        // the function returns a node
         h++;
     }
     while(index <= len-1){
@@ -517,6 +516,7 @@ int main(){
         index++;
     }
 //
+// self examination
         }
         else if (c == 'B'){
          insert_node_cmd(node);
@@ -524,7 +524,8 @@ int main(){
            //
         }
         else if (c == 'D'){
-           // delete_node_cmd(node);
+          // the function checks the integrity of flag
+
            int flag = -1;
     scanf("%d", &flag);
     if(flag==0){
