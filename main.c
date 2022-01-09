@@ -5,9 +5,7 @@ int value = infinity;
 int len;
 pnode graph;
 
-void build_graph_cmd(pnode *head){
-
-   // deleteGraph_cmd(head);
+/*void build_graph_cmd(pnode *head){
    for (pnode ind_node = *head;ind_node != NULL;ind_node = ind_node->next){
         if(ind_node->node_num==0){
             int y = 0;
@@ -44,7 +42,7 @@ void build_graph_cmd(pnode *head){
         insert_node_cmd(head);
         index++;
     }
-}
+}*/
 
 void check(int id){
     if(id < 0){
@@ -166,36 +164,6 @@ void insert_node_cmd(pnode *head){
         flag = scanf("%d", &destination);
     }
 }
-
-
-
-void deleteGraph_cmd(pnode *head){
-    
-    for (pnode ind_node = *head;ind_node != NULL;ind_node = ind_node->next){
-        if(ind_node->node_num==0){
-            int y = 0;
-            y++;
-        }
-       
-        for( pedge ind_edge = ind_node->edges;ind_edge != NULL; ind_edge = ind_edge->next){
-            if(ind_edge->endpoint->node_num==0){
-                int w = 0;
-                w++;
-            }
-            pedge other = ind_edge;
-           
-            free(other);
-        }
-        
-        pnode other = ind_node;
-        
-        free(other);
-    }
-    *head = NULL;
-}
-
-
-
 void delete_node_cmd(pnode *head){
     int flag = -1;
     scanf("%d", &flag);
@@ -598,7 +566,45 @@ int main(){
     char c = '\0';
     while (scanf("%c", &c) != EOF){
         if (c == 'A'){
-            build_graph_cmd(node);
+           // build_graph_cmd(node);
+
+         for (pnode ind_node = *node;ind_node != NULL;ind_node = ind_node->next){
+        if(ind_node->node_num==0){
+            int y = 0;
+            y++;
+        }
+       
+        for( pedge ind_edge = ind_node->edges;ind_edge != NULL; ind_edge = ind_edge->next){
+            if(ind_edge->endpoint->node_num==0){
+                int w = 0;
+                w++;
+            }
+            pedge other = ind_edge;
+           
+            free(other);
+        }
+        
+        pnode other = ind_node;
+        
+        free(other);
+    }
+    *node = NULL;
+
+    int len = 0;
+    int index = 0;
+    char c;
+    scanf("%d", &len);
+    scanf("%c", &c);
+    if(index==len){
+        int h =0;
+        h++;
+    }
+    while(index <= len-1){
+        scanf("%c", &c);
+        insert_node_cmd(node);
+        index++;
+    }
+//
         }
         else if (c == 'B'){
             insert_node_cmd(node);
