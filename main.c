@@ -37,15 +37,6 @@ pnode getNode(pnode *node, int id_num){
     return NULL;
 }
 
-
-int check2(int flag){
-    int b = 0;
-    if(flag != 0 && flag != EOF){
-        b = 1;
-    }
-    return b;
-}
-
 void insert_node_cmd(pnode *head){
     int id_num = -1;
     scanf("%d", &id_num);
@@ -72,8 +63,7 @@ void insert_node_cmd(pnode *head){
     pedge *edge = &(source->edges);
     int destination = -1;
     int flag = scanf("%d", &destination);
-    int b = check2(flag);
-    while (b == 1){
+    while (flag != 0 && flag != EOF){
         pnode dest = getNode(head, destination);
         int value = -1;
         scanf("%d", &value);
@@ -96,20 +86,14 @@ void insert_node_cmd(pnode *head){
         (*edge)->next = NULL;
         edge = &((*edge)->next);
         flag = scanf("%d", &destination);
-        b = check2(flag);
     }
 }
 
 
 
-
 void deleteGraph_cmd(pnode *head){
     pnode ind_node = *head;
-    int b = 0;
-    if(ind_node != NULL){
-        b = 1;
-    }
-    while (b == 1){
+    while (ind_node != NULL){
         pedge ind_edge = ind_node->edges;
         while (ind_edge != NULL){
             pedge other = ind_edge;
@@ -119,66 +103,39 @@ void deleteGraph_cmd(pnode *head){
         pnode other = ind_node;
         ind_node = ind_node->next;
         free(other);
-        if(ind_node != NULL){
-        b = 1;
-        }
     }
     *head = NULL;
 }
 
-void check3(int flag){
-    
-    if(flag < 0 ){
-        int b = 1;
-        b ++;
-    }
-    
-}
+
 
 void delete_node_cmd(pnode *head){
     int flag = -1;
-    check3(flag);
     scanf("%d", &flag);
-    if(flag==0){
-        int h = 0;
-        h++;
-    }
     
     pnode befor = NULL;
-    if(flag==-1){
-        int j =0;
-        j++;
-
-    }
-    for (pnode ind_node = *head;ind_node != NULL; ind_node = ind_node->next){
-        if (ind_node->next != NULL){
-            if(ind_node->next->node_num == flag){
+    for (pnode ind_node = *head;ind_node != NULL;ind_node = ind_node->next){
+        if (ind_node->next != NULL && ind_node->next->node_num == flag){
             befor = ind_node;
-            }
         }
-        if (ind_node->edges != NULL){
-            if(ind_node->edges->endpoint->node_num == flag){
+        if (ind_node->edges != NULL && ind_node->edges->endpoint->node_num == flag){
             pedge other = ind_node->edges;
             ind_node->edges = ind_node->edges->next;
             free(other);
-           
-         
-            }
+            
+            continue;
         }
         pedge ind_edge = ind_node->edges;
         if (ind_edge != NULL){
-            for (;ind_edge->next != NULL; ind_node = ind_node->next){
+            for (;ind_edge->next != NULL;ind_edge = ind_edge->next){
                 if (ind_edge->next->endpoint->node_num == flag){
                     pedge temp = ind_edge->next;
                     ind_edge->next = temp->next;
                     free(temp);
                 }
-                else{
-                    ind_edge = ind_edge->next;
-                }
             }
         }
-       
+        ind_node = ind_node->next;
     }
     if (befor != NULL){
         pnode delete = befor->next;
@@ -192,6 +149,8 @@ void delete_node_cmd(pnode *head){
         free(delete);
     }
 }
+
+
 
 void cir(int from, int *arr){
     if (from == len - 1){
