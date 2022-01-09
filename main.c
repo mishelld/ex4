@@ -127,11 +127,14 @@ void delete_node_cmd(pnode *head){
         }
         pedge ind_edge = ind_node->edges;
         if (ind_edge != NULL){
-            for (;ind_edge->next != NULL;ind_edge = ind_edge->next){
+            while (ind_edge->next != NULL){
                 if (ind_edge->next->endpoint->node_num == flag){
                     pedge temp = ind_edge->next;
                     ind_edge->next = temp->next;
                     free(temp);
+                }
+                else{
+                    ind_edge = ind_edge->next;
                 }
             }
         }
@@ -139,10 +142,10 @@ void delete_node_cmd(pnode *head){
     }
     if (befor != NULL){
         pnode delete = befor->next;
-        
-        for (pedge ind_edge = delete->edges;ind_edge != NULL;ind_edge = ind_edge->next){
+        pedge ind_edge = delete->edges;
+        while (ind_edge != NULL){
             pedge other = ind_edge;
-            
+            ind_edge = ind_edge->next;
             free(other);
         }
         befor->next = delete->next;
