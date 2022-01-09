@@ -122,6 +122,8 @@ void delete_node_cmd(pnode *head){
             pedge other = ind_node->edges;
             ind_node->edges = ind_node->edges->next;
             free(other);
+            
+            continue;
         }
         pedge ind_edge = ind_node->edges;
         if (ind_edge != NULL){
