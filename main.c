@@ -94,12 +94,21 @@ void insert_node_cmd(pnode *head){
 void deleteGraph_cmd(pnode *head){
     
     for (pnode ind_node = *head;ind_node != NULL;ind_node = ind_node->next){
+        if(ind_node->node_num==0){
+            int y = 0;
+            y++;
+        }
        
         for( pedge ind_edge = ind_node->edges;ind_edge != NULL; ind_edge = ind_edge->next){
+            if(ind_edge->endpoint->node_num==0){
+                int w = 0;
+                w++;
+            }
             pedge other = ind_edge;
            
             free(other);
         }
+        
         pnode other = ind_node;
         
         free(other);
