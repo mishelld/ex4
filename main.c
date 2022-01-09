@@ -52,11 +52,11 @@ void insert_node_cmd(pnode *head){
         *head = source;
     }
     else{
-        pedge ind = source->edges;
-        while (ind != NULL){
-            pedge other = ind->next;
+       
+        for( pedge ind = source->edges;ind != NULL;ind=ind->next){
+          
             free(ind);
-            ind = other;
+           
         }
         source->edges = NULL;
     }
