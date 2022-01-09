@@ -3,22 +3,22 @@
 #ifndef GRAPH_
 #define GRAPH_
 #define big 100000
-typedef struct GRAPH_NODE_ *p_d;;
+typedef struct nod *p_d;
 
-typedef struct edge_ {
+typedef struct e {
     int cost;
     p_d p;
-    struct edge_ *fore;
+    struct e *fore;
 } edge, *pedge;
 
 
-typedef struct GRAPH_NODE_ {
+typedef struct nod {
     p_d no;
     int val;
     int value;
     int visited;
     pedge ed;
-    struct GRAPH_NODE_ *next ,*bef;
+    struct nod *next ,*bef;
 } n, n_d, *p_n, *p_d;
 
 void input_node(p_d *head);
