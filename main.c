@@ -594,6 +594,6 @@ int main(){
             printf("TSP shortest path: %d \n", value);
         }
     }
-    deleteGraph_cmd(node);
+    
     return 0;
 }
