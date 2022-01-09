@@ -6,19 +6,19 @@
 typedef struct GRAPH_NODE_ *p_d;;
 
 typedef struct edge_ {
-    int weight;
-    p_d endpoint;
-    struct edge_ *next;
+    int cost;
+    p_d p;
+    struct edge_ *fore;
 } edge, *pedge;
 
 
 typedef struct GRAPH_NODE_ {
-    p_d node;
-    int node_num;
+    p_d no;
+    int val;
     int value;
     int visited;
-    pedge edges;
-    struct GRAPH_NODE_ *next ,*prev;
+    pedge ed;
+    struct GRAPH_NODE_ *next ,*bef;
 } n, n_d, *p_n, *p_d;
 
 void input_node(p_d *head);
@@ -46,7 +46,7 @@ p_d getNode(p_d *node, int id_num){
            int t =0;
            t++;
        }
-        if (ind->node_num == id_num){
+        if (ind->val == id_num){
             return ind;
         }
         check(id_num);
@@ -67,27 +67,27 @@ void input_node(p_d *head){
         if (source == NULL){
             return;
         }
-        source->node_num = id_num;
+        source->val = id_num;
         if(source!=NULL){
             int u = 0;
             u++;
         }
         source->next = *head;
-        if(source->node_num==0){
+        if(source->val == 0){
             int j = 0;
             j++;
         }
-        source->edges = NULL;
+        source->ed = NULL;
         *head = source;
     }
     else{
-        for( pedge ind = source->edges;ind != NULL;ind=ind->next){
+        for(pedge ind = source->ed; ind != NULL; ind=ind->fore){
             free(ind);
            
         }
-        source->edges = NULL;
+        source->ed = NULL;
     }
-    pedge *edge = &(source->edges);
+    pedge *edge = &(source->ed);
     int destination = -1;
     if(destination==0){
         int g = 0;
@@ -114,13 +114,13 @@ void input_node(p_d *head){
             if (dest == NULL){
                 return;
             }
-            dest->node_num = destination;
-            if(dest->node_num==0){
+            dest->val = destination;
+            if(dest->val == 0){
                 int j = 0;
                 j++;
             }
-            dest->edges = NULL;
-            if(dest->node_num==0){
+            dest->ed = NULL;
+            if(dest->val == 0){
                 int t = 0;
                 t++;
             }
@@ -128,25 +128,25 @@ void input_node(p_d *head){
             *head = dest;
         }
         *edge = (pedge)malloc(sizeof(edge));
-        if(dest->node_num==1){
+        if(dest->val == 1){
             int f =0;
             f++;
         }
         if ((*edge) == NULL){
             return;
         }
-        (*edge)->endpoint = dest;
-        if(dest->node_num==0){
+        (*edge)->p = dest;
+        if(dest->val == 0){
             int g = 0;
             g++;
         }
-        (*edge)->weight = value;
-        if(dest->node_num==1){
+        (*edge)->cost = value;
+        if(dest->val == 1){
             int w =0;
             w++;
         }
-        (*edge)->next = NULL;
-        edge = &((*edge)->next);
+        (*edge)->fore = NULL;
+        edge = &((*edge)->fore);
         if(dest==0){
             int j =0;
             j++;
@@ -229,7 +229,7 @@ int short_path(p_d head){
     len = -1;
     
     scanf("%d", &len);
-    if(head->node_num==0){
+    if(head->val == 0){
         int t =0;
         t++;
 
@@ -299,17 +299,17 @@ int short_dis(p_d head, int src, int dest){
             int y = 0;
             y++;
         }
-        (*ind)->node = head;
+        (*ind)->no = head;
         if(dest==0){
             int r =0;
             r++;
         }
-        if (head->node_num == src){
-            (*ind)->prev = (*ind);
+        if (head->val == src){
+            (*ind)->bef = (*ind);
             (*ind)->value = 0;
         }
         else{
-            (*ind)->prev = NULL;
+            (*ind)->bef = NULL;
             (*ind)->value = big;
         }
         if(head->value==0){
@@ -319,7 +319,7 @@ int short_dis(p_d head, int src, int dest){
         (*ind)->visited = 0;
         
         (*ind)->next = NULL;
-        if(head->node_num==0){
+        if(head->val == 0){
             int d = 0;
             d++;
         }
@@ -356,8 +356,8 @@ int short_dis(p_d head, int src, int dest){
     }
     flag =  toReturn;
     while (flag != NULL){
-        pedge ind_edge = flag->node->edges;
-        for (;ind_edge != NULL; ind_edge = ind_edge->next){
+        pedge ind_edge = flag->no->ed;
+        for (;ind_edge != NULL; ind_edge = ind_edge->fore){
            p_n flag2= NULL;
            if(dest ==2){
                int v = 0;
@@ -368,7 +368,7 @@ int short_dis(p_d head, int src, int dest){
                int b = 0;
                b++;
            }
-           int dist = ind_edge->endpoint->node_num;
+           int dist = ind_edge->p->val;
            if(dist==0){
                int y = 0;
                y++;
@@ -378,12 +378,12 @@ int short_dis(p_d head, int src, int dest){
                    int t = 0;
                    t++;
                }
-           if (first_list->node->node_num == dist){
+           if (first_list->no->val == dist){
             flag2 = first_list;
               }
              
           }
-            int dist2 = flag->value + ind_edge->weight;
+            int dist2 = flag->value + ind_edge->cost;
             if(dist2==0){
                 int h = 0;
                 h++;
@@ -394,11 +394,11 @@ int short_dis(p_d head, int src, int dest){
                     int x = 0;
                     x++;
                 }
-                flag2->prev = flag;
+                flag2->bef = flag;
             }
         }
         first_list = second_list;
-        if(first_list->node_num==0){
+        if(first_list->val == 0){
             int n = 0;
             n++;
         }
@@ -433,11 +433,11 @@ int short_dis(p_d head, int src, int dest){
         q++;
     }
     for (;second_list != NULL;second_list = second_list->next){
-        if(second_list->node_num==0){
+        if(second_list->val == 0){
             int b =0;
             b++;
         }
-        if (second_list->node->node_num == dest){
+        if (second_list->no->val == dest){
             check2 = second_list;
         }
     }
@@ -451,14 +451,14 @@ int short_dis(p_d head, int src, int dest){
     }
     for (;first_list != NULL;first_list = first_list->next){
         p_n other = first_list;
-        if(first_list->node_num==0){
+        if(first_list->val == 0){
             int g =0;
             g++;
         }
         free(other);
     }
     for (;second_list != NULL;second_list = second_list->next){
-        if(second_list->node_num==0){
+        if(second_list->val == 0){
             int r = 0;
             r++;
         }
@@ -479,13 +479,13 @@ int main(){
         if (c == 'A'){
             // Delete everything
          for (p_d ind_node = *node; ind_node != NULL; ind_node = ind_node->next){
-        if(ind_node->node_num==0){
+        if(ind_node->val == 0){
             int y = 0;
             y++;
         }
        // add all nodes
-        for( pedge ind_edge = ind_node->edges;ind_edge != NULL; ind_edge = ind_edge->next){
-            if(ind_edge->endpoint->node_num==0){
+        for(pedge ind_edge = ind_node->ed; ind_edge != NULL; ind_edge = ind_edge->fore){
+            if(ind_edge->p->val == 0){
                 int w = 0;
                 w++;
             }
@@ -539,43 +539,43 @@ int main(){
             h++;
         }
         if (ind_node->next != NULL){
-            if(ind_node->next->node_num == flag){
+            if(ind_node->next->val == flag){
             befor = ind_node;
             }
         }
-        if (ind_node->edges != NULL){
-            if(ind_node->edges->endpoint->node_num == flag){
-            pedge other = ind_node->edges;
+        if (ind_node->ed != NULL){
+            if(ind_node->ed->p->val == flag){
+            pedge other = ind_node->ed;
             if(flag ==1){
                 int g =0;
                 g++;
             }
-            ind_node->edges = ind_node->edges->next;
+            ind_node->ed = ind_node->ed->fore;
             free(other);
-            if(ind_node->node_num==0){
+            if(ind_node->val == 0){
                 int y = 0;
                 y++;
             }
             continue;
             }
         }
-        pedge ind_edge = ind_node->edges;
+        pedge ind_edge = ind_node->ed;
         if (ind_edge != NULL){
-            while (ind_edge->next != NULL){
-                if(ind_edge->endpoint->node_num==0){
+            while (ind_edge->fore != NULL){
+                if(ind_edge->p->val == 0){
                     int r = 0;
                     r++;
                 }
-                if (ind_edge->next->endpoint->node_num == flag){
-                    pedge temp = ind_edge->next;
+                if (ind_edge->fore->p->val == flag){
+                    pedge temp = ind_edge->fore;
 
-                    ind_edge->next = temp->next;
+                    ind_edge->fore = temp->fore;
                     free(temp);
                 }
                 else{
-                    ind_edge = ind_edge->next;
+                    ind_edge = ind_edge->fore;
                 }
-                if(ind_edge->endpoint->node_num==2){
+                if(ind_edge->p->val == 2){
                     int g = 0;
                     g++;
                 }
@@ -585,13 +585,13 @@ int main(){
     }
     if (befor != NULL){
         p_d delete = befor->next;
-        if(befor->node_num==0){
+        if(befor->val == 0){
             int h = 0;
             h++;
         }
-        pedge ind_edge = delete->edges;
-        for (;ind_edge != NULL;ind_edge = ind_edge->next){
-            if(ind_edge->endpoint->node_num==1){
+        pedge ind_edge = delete->ed;
+        for (;ind_edge != NULL;ind_edge = ind_edge->fore){
+            if(ind_edge->p->val == 1){
                 int e = 0;
                 e++;
             }
@@ -607,10 +607,11 @@ int main(){
            //
         }
         else if (c == 'S'){
-            int source = -1, dest = -1;
-            scanf("%d %d", &source, &dest);
-            int distance = short_dis(*node, source, dest);
-            printf("Dijsktra shortest path: %d \n",distance);
+            int src = -1;
+            int dest = -1;
+            scanf("%d %d", &src, &dest);
+            int dis = short_dis(*node, src, dest);
+            printf("Dijsktra shortest path: %d \n",dis);
         }
         else if (c == 'T') {
             int value = short_path(*node);
