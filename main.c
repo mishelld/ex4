@@ -125,85 +125,6 @@ void insert_node_cmd(pnode *head){
         flag = scanf("%d", &destination);
     }
 }
-/*void delete_node_cmd(pnode *head){
-    int flag = -1;
-    scanf("%d", &flag);
-    if(flag==0){
-        int y =0;
-        y++;
-    }
-    pnode befor = NULL;
-    for (pnode ind_node = *head;ind_node != NULL;ind_node = ind_node->next){
-        if(flag==1){
-            int h = 0;
-            h++;
-        }
-        if (ind_node->next != NULL){
-            if(ind_node->next->node_num == flag){
-            befor = ind_node;
-            }
-        }
-        if (ind_node->edges != NULL){
-            if(ind_node->edges->endpoint->node_num == flag){
-            pedge other = ind_node->edges;
-            if(flag ==1){
-                int g =0;
-                g++;
-            }
-            ind_node->edges = ind_node->edges->next;
-            free(other);
-            if(ind_node->node_num==0){
-                int y = 0;
-                y++;
-            }
-            continue;
-            }
-        }
-        pedge ind_edge = ind_node->edges;
-        if (ind_edge != NULL){
-            while (ind_edge->next != NULL){
-                if(ind_edge->endpoint->node_num==0){
-                    int r = 0;
-                    r++;
-                }
-                if (ind_edge->next->endpoint->node_num == flag){
-                    pedge temp = ind_edge->next;
-
-                    ind_edge->next = temp->next;
-                    free(temp);
-                }
-                else{
-                    ind_edge = ind_edge->next;
-                }
-                if(ind_edge->endpoint->node_num==2){
-                    int g = 0;
-                    g++;
-                }
-            }
-        }
-        ind_node = ind_node->next;
-    }
-    if (befor != NULL){
-        pnode delete = befor->next;
-        if(befor->node_num==0){
-            int h = 0;
-            h++;
-        }
-        pedge ind_edge = delete->edges;
-        for (;ind_edge != NULL;ind_edge = ind_edge->next){
-            if(ind_edge->endpoint->node_num==1){
-                int e = 0;
-                e++;
-            }
-            pedge other = ind_edge;
-            
-            free(other);
-        }
-        befor->next = delete->next;
-        free(delete);
-    }
-}*/
-
 
 
 void cir(int from, int *arr){
@@ -659,8 +580,61 @@ int main(){
             printf("Dijsktra shortest path: %d \n",distance);
         }
         else if (c == 'T') {
-            int value = TSP_cmd(*node);
-            printf("TSP shortest path: %d \n", value);
+  int v = -1;
+    scanf("%d", &len);
+    if(len==0){
+        int t =0;
+        t++;
+
+    }
+    
+    int *arr = (int *)malloc(sizeof(int) * len);
+    if (arr == NULL){
+        arr = NULL;
+    }
+    int i = 0;
+    while( i < len){
+        scanf("%d", &arr[i]);
+      if(i==0){
+          int j = 0;
+          j++;
+      }
+        i++;
+    }
+
+     int *other = (int *)malloc(sizeof(int) * len);
+    if (other == NULL){
+        other =  NULL;
+    }
+    int j = 0;
+    while(j < len){
+        other[j] = arr[j];
+        j++;
+        if(j==0){
+            int r=0;
+            r++;
+        }
+    }
+    cir(0, other);
+    if(j==0){
+        int u = 0;
+        u++;
+    }
+    free(arr);
+    if(other==0){
+        int s =0;
+        s++;
+    }
+    free(other);
+    if(value>infinity){
+        int h =0;
+        h++;
+    }
+    if(value<infinity){
+    v = value;
+    }
+     printf("TSP shortest path: %d \n", v);
+            //
         }
     }
     
