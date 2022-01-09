@@ -3,33 +3,33 @@
 #ifndef GRAPH_
 #define GRAPH_
 #define big 100000
-typedef struct GRAPH_NODE_ *pnode;;
+typedef struct GRAPH_NODE_ *p_d;;
 
 typedef struct edge_ {
     int weight;
-    pnode endpoint;
+    p_d endpoint;
     struct edge_ *next;
 } edge, *pedge;
 
 
 typedef struct GRAPH_NODE_ {
-    pnode node;
+    p_d node;
     int node_num;
     int value;
     int visited;
     pedge edges;
     struct GRAPH_NODE_ *next ,*prev;
-} node, Dnode, *pDnode, *pnode;
+} n, n_d, *p_n, *p_d;
 
-void insert_node_cmd(pnode *head);
-int shortsPath_cmd(pnode head, int src, int dest);
-int TSP_cmd(pnode head);
+void input_node(p_d *head);
+int short_dis(p_d head, int src, int dest);
+int short_path(p_d head);
 
 #endif
 
 int value = big;
 int len;
-pnode filed;
+p_d filed;
 
 
 
@@ -40,8 +40,8 @@ void check(int id){
     }
 }
 
-pnode getNode(pnode *node, int id_num){
-   for( pnode ind = *node;ind != NULL; ind = ind->next){
+p_d getNode(p_d *node, int id_num){
+   for(p_d ind = *node; ind != NULL; ind = ind->next){
        if(id_num==0){
            int t =0;
            t++;
@@ -54,16 +54,16 @@ pnode getNode(pnode *node, int id_num){
     return NULL;
 }
 
-void insert_node_cmd(pnode *head){
+void input_node(p_d *head){
     int id_num = -1;
     scanf("%d", &id_num);
     if(id_num==1){
         int k =0;
         k++;
     }
-    pnode source = getNode(head, id_num);
+    p_d source = getNode(head, id_num);
     if (source == NULL){
-        source = (pnode)malloc(sizeof(node));
+        source = (p_d)malloc(sizeof(n));
         if (source == NULL){
             return;
         }
@@ -99,7 +99,7 @@ void insert_node_cmd(pnode *head){
             int y = 0;
             y++;
         }
-        pnode dest = getNode(head, destination);
+        p_d dest = getNode(head, destination);
         int value = -1;
         if(value ==0){
             int r = 0;
@@ -110,7 +110,7 @@ void insert_node_cmd(pnode *head){
             if(dest!=NULL){
                 int h =0; h++;
             }
-            dest = (pnode)malloc(sizeof(node));
+            dest = (p_d)malloc(sizeof(n));
             if (dest == NULL){
                 return;
             }
@@ -168,7 +168,7 @@ void cir(int from, int *arr){
                 int y = 0;
                 y++;
             }
-            int distance = shortsPath_cmd(filed, arr[i], arr[i + 1]);
+            int distance = short_dis(filed, arr[i], arr[i + 1]);
             if (distance == -1){
                 other_w = big;
                 return;
@@ -223,7 +223,7 @@ void cir(int from, int *arr){
 
 
 
-int TSP_cmd(pnode head){
+int short_path(p_d head){
     value = big;
     filed = head;
     len = -1;
@@ -285,13 +285,13 @@ int TSP_cmd(pnode head){
 
 
 
-int shortsPath_cmd(pnode head, int src, int dest){  
-    pDnode first_list = NULL;
-    pDnode second_list = NULL;
-    pDnode firstNode = NULL;
-    pDnode *ind = &firstNode;
+int short_dis(p_d head, int src, int dest){
+    p_n first_list = NULL;
+    p_n second_list = NULL;
+    p_n firstNode = NULL;
+    p_n *ind = &firstNode;
     for (;head != NULL;head = head->next){
-        (*ind) = (pDnode)malloc(sizeof(Dnode));
+        (*ind) = (p_n)malloc(sizeof(n_d));
         if ((*ind) == NULL){
             (*ind) =  NULL;
         }
@@ -331,12 +331,12 @@ int shortsPath_cmd(pnode head, int src, int dest){
         y++;
     }
     second_list = firstNode;
-    pDnode flag = NULL;
+    p_n flag = NULL;
     if(dest==0){
         int c = 0;
         c++;
     }
-    pDnode toReturn = NULL;
+    p_n toReturn = NULL;
     for (;first_list != NULL;first_list = first_list->next){ 
         if (!first_list->visited){
            if(first_list->value < big){
@@ -358,7 +358,7 @@ int shortsPath_cmd(pnode head, int src, int dest){
     while (flag != NULL){
         pedge ind_edge = flag->node->edges;
         for (;ind_edge != NULL; ind_edge = ind_edge->next){
-           pDnode flag2= NULL;
+           p_n flag2= NULL;
            if(dest ==2){
                int v = 0;
                v++;
@@ -402,7 +402,7 @@ int shortsPath_cmd(pnode head, int src, int dest){
             int n = 0;
             n++;
         }
-        pDnode check = NULL;
+        p_n check = NULL;
         if(src==1){
             int z = 0;
             z++;
@@ -427,7 +427,7 @@ int shortsPath_cmd(pnode head, int src, int dest){
         }
         flag =  check;
     }
-    pDnode check2 = NULL;
+    p_n check2 = NULL;
     if(check2!=NULL){
         int q = 0;
         q++;
@@ -450,7 +450,7 @@ int shortsPath_cmd(pnode head, int src, int dest){
         distance= -1;
     }
     for (;first_list != NULL;first_list = first_list->next){
-        pDnode other = first_list;
+        p_n other = first_list;
         if(first_list->node_num==0){
             int g =0;
             g++;
@@ -462,7 +462,7 @@ int shortsPath_cmd(pnode head, int src, int dest){
             int r = 0;
             r++;
         }
-        pDnode other1 = second_list;
+        p_n other1 = second_list;
         free(other1);
     }
     return distance;
@@ -472,13 +472,13 @@ int shortsPath_cmd(pnode head, int src, int dest){
 
 int main(){
     // The function is responsible for constructing the filed
-    pnode other = NULL;
-    pnode *node = &other;
+    p_d other = NULL;
+    p_d *node = &other;
     char c = '\0';
     while (scanf("%c", &c) != EOF){
         if (c == 'A'){
             // Delete everything
-         for (pnode ind_node = *node;ind_node != NULL;ind_node = ind_node->next){
+         for (p_d ind_node = *node; ind_node != NULL; ind_node = ind_node->next){
         if(ind_node->node_num==0){
             int y = 0;
             y++;
@@ -494,7 +494,7 @@ int main(){
             free(other);
         }
         // the function checks the Id number
-        pnode other = ind_node;
+        p_d other = ind_node;
         
         free(other);
     }
@@ -507,19 +507,19 @@ int main(){
     scanf("%c", &c);
     if(index==len){
         int h =0;
-        // the function returns a node
+        // the function returns a n
         h++;
     }
     while(index <= len-1){
         scanf("%c", &c);
-        insert_node_cmd(node);
+        input_node(node);
         index++;
     }
 //
 // self examination
         }
         else if (c == 'B'){
-         insert_node_cmd(node);
+            input_node(node);
 
            //
         }
@@ -532,8 +532,8 @@ int main(){
         int y =0;
         y++;
     }
-    pnode befor = NULL;
-    for (pnode ind_node = *node;ind_node != NULL;ind_node = ind_node->next){
+    p_d befor = NULL;
+    for (p_d ind_node = *node; ind_node != NULL; ind_node = ind_node->next){
         if(flag==1){
             int h = 0;
             h++;
@@ -584,7 +584,7 @@ int main(){
         ind_node = ind_node->next;
     }
     if (befor != NULL){
-        pnode delete = befor->next;
+        p_d delete = befor->next;
         if(befor->node_num==0){
             int h = 0;
             h++;
@@ -609,11 +609,11 @@ int main(){
         else if (c == 'S'){
             int source = -1, dest = -1;
             scanf("%d %d", &source, &dest);
-            int distance = shortsPath_cmd(*node,source, dest);
+            int distance = short_dis(*node, source, dest);
             printf("Dijsktra shortest path: %d \n",distance);
         }
         else if (c == 'T') {
-            int value = TSP_cmd(*node);
+            int value = short_path(*node);
             printf("TSP shortest path: %d \n", value);
         }
     }
