@@ -1,9 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "graph.h"
+#ifndef GRAPH_
+#define GRAPH_
+#define infinity 100000
+typedef struct GRAPH_NODE_ *pnode;;
+
+typedef struct edge_ {
+    int weight;
+    pnode endpoint;
+    struct edge_ *next;
+} edge, *pedge;
+
+
+typedef struct GRAPH_NODE_ {
+    pnode node;
+    int node_num;
+    int value;
+    int visited;
+    pedge edges;
+    struct GRAPH_NODE_ *next ,*prev;
+} node, Dnode, *pDnode, *pnode;
+
+void build_graph_cmd(pnode *head);
+void insert_node_cmd(pnode *head);
+void delete_node_cmd(pnode *head);
+void printGraph_cmd(pnode head);
+void deleteGraph_cmd(pnode* head);
+int shortsPath_cmd(pnode head, int src, int dest);
+int TSP_cmd(pnode head);
+
+#endif
+
 int value = infinity;
 int len;
 pnode graph;
+
+
+
 
 void check(int id){
     if(id < 0){
@@ -125,7 +158,6 @@ void insert_node_cmd(pnode *head){
         flag = scanf("%d", &destination);
     }
 }
-
 
 void cir(int from, int *arr){
     if (from == len - 1){
@@ -569,204 +601,19 @@ int main(){
         befor->next = delete->next;
         free(delete);
     }
+
+        
+           //
         }
         else if (c == 'S'){
-            int src = -1, dest = -1;
-            scanf("%d %d", &src, &dest);
-            int distance = -1;
-
-
-//
- pDnode first_list = NULL;
-    pDnode second_list = NULL;
-    pDnode firstNode = NULL;
-    pDnode *ind = &firstNode;
-    for (;graph != NULL;graph = graph->next){
-        (*ind) = (pDnode)malloc(sizeof(Dnode));
-        if ((*ind) == NULL){
-            (*ind) =  NULL;
-        }
-        if(src==0){
-            int y = 0;
-            y++;
-        }
-        (*ind)->node = graph;
-        if(dest==0){
-            int r =0;
-            r++;
-        }
-        if (graph->node_num == src){
-            (*ind)->prev = (*ind);
-            (*ind)->value = 0;
-        }
-        else{
-            (*ind)->prev = NULL;
-            (*ind)->value = infinity;
-        }
-        if(graph->value==0){
-            int w = 0;
-            w++;
-        }
-        (*ind)->visited = 0;
-        
-        (*ind)->next = NULL;
-        if(graph->node_num==0){
-            int d = 0;
-            d++;
-        }
-        ind = &((*ind)->next);
-    }
-    first_list =  firstNode;
-    if(src==1){
-        int y = 0;
-        y++;
-    }
-    second_list = firstNode;
-    pDnode flag = NULL;
-    if(dest==0){
-        int c = 0;
-        c++;
-    }
-    pDnode toReturn = NULL;
-    for (;first_list != NULL;first_list = first_list->next){ 
-        if (!first_list->visited){
-           if(first_list->value < infinity){
-               if((toReturn == NULL || toReturn->value < first_list->value)){
-            toReturn = first_list;
-               }
-           }
-        }
-        
-    }
-    if (toReturn != NULL){
-        toReturn->visited = 1;
-    }
-    if(src==2){
-        int f =0;
-        f++;
-    }
-    flag =  toReturn;
-    while (flag != NULL){
-        pedge ind_edge = flag->node->edges;
-        for (;ind_edge != NULL; ind_edge = ind_edge->next){
-           pDnode flag2= NULL;
-           if(dest ==2){
-               int v = 0;
-               v++;
-           }
-           first_list = second_list;
-           if(flag){
-               int b = 0;
-               b++;
-           }
-           int dist = ind_edge->endpoint->node_num;
-           if(dist==0){
-               int y = 0;
-               y++;
-           }
-           for (;first_list != NULL;first_list = first_list->next){
-               if(first_list==NULL){
-                   int t = 0;
-                   t++;
-               }
-           if (first_list->node->node_num == dist){
-            flag2 = first_list;
-              }
-             
-          }
-            int dist2 = flag->value + ind_edge->weight;
-            if(dist2==0){
-                int h = 0;
-                h++;
-            }
-            if (flag2->value > dist2){
-                flag2->value = dist2;
-                if(flag2==0){
-                    int x = 0;
-                    x++;
-                }
-                flag2->prev = flag;
-            }
-        }
-        first_list = second_list;
-        if(first_list->node_num==0){
-            int n = 0;
-            n++;
-        }
-        pDnode check = NULL;
-        if(src==1){
-            int z = 0;
-            z++;
-        }
-        for(;first_list != NULL;first_list = first_list->next){ 
-            
-            if (!first_list->visited  ){
-                if(first_list->value < infinity){
-                    if((check == NULL || check->value < first_list->value)){
-                check = first_list;
-                    }
-                }
-            }
-            
-        }
-        if (check != NULL){
-            check->visited = 1;
-        }
-        if(check==NULL){
-            int f =0;
-            f++;
-        }
-        flag =  check;
-    }
-    pDnode check2 = NULL;
-    if(check2!=NULL){
-        int q = 0;
-        q++;
-    }
-    for (;second_list != NULL;second_list = second_list->next){
-        if(second_list->node_num==0){
-            int b =0;
-            b++;
-        }
-        if (second_list->node->node_num == dest){
-            check2 = second_list;
-        }
-    }
-    //int distance = check2->value;
-    if(distance != infinity){
-        int j = 0;
-        j++;
-    }
-    if(distance == infinity){
-        distance= -1;
-    }
-    for (;first_list != NULL;first_list = first_list->next){
-        pDnode other = first_list;
-        if(first_list->node_num==0){
-            int g =0;
-            g++;
-        }
-        free(other);
-    }
-    for (;second_list != NULL;second_list = second_list->next){
-        if(second_list->node_num==0){
-            int r = 0;
-            r++;
-        }
-        pDnode other1 = second_list;
-        free(other1);
-    }
-    
-
-//
-
-         
+            int source = -1, dest = -1;
+            scanf("%d %d", &source, &dest);
+            int distance = shortsPath_cmd(*node,source, dest);
             printf("Dijsktra shortest path: %d \n",distance);
         }
         else if (c == 'T') {
             int value = TSP_cmd(*node);
             printf("TSP shortest path: %d \n", value);
-           
         }
     }
     
