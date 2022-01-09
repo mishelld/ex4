@@ -143,9 +143,9 @@ void delete_node_cmd(pnode *head){
     if (befor != NULL){
         pnode delete = befor->next;
         pedge ind_edge = delete->edges;
-        while (ind_edge != NULL){
+        for (;ind_edge != NULL;ind_edge = ind_edge->next){
             pedge other = ind_edge;
-            ind_edge = ind_edge->next;
+            
             free(other);
         }
         befor->next = delete->next;
