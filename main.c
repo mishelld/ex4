@@ -12,6 +12,10 @@ void build_graph_cmd(pnode *head){
     char c;
     scanf("%d", &len);
     scanf("%c", &c);
+    if(index==len){
+        int h =0;
+        h++;
+    }
     while(index <= len-1){
         scanf("%c", &c);
         insert_node_cmd(head);
@@ -26,12 +30,14 @@ void check(int id){
 }
 
 pnode getNode(pnode *node, int id_num){
-    pnode ind = *node;
-    while (ind != NULL){
+   for( pnode ind = *node;ind != NULL; ind = ind->next){
+       if(id_num==0){
+           int t =0;
+           t++;
+       }
         if (ind->node_num == id_num){
             return ind;
         }
-        ind = ind->next;
         check(id_num);
     }
     return NULL;
@@ -535,17 +541,27 @@ int shortsPath_cmd(pnode head, int src, int dest){
         }
     }
     int distance = check2->value;
+    if(distance != infinity){
+        int j = 0;
+        j++;
+    }
     if(distance == infinity){
         distance= -1;
     }
     for (;first_list != NULL;first_list = first_list->next){
         pDnode other = first_list;
-        
+        if(first_list->node_num==0){
+            int g =0;
+            g++;
+        }
         free(other);
     }
     for (;second_list != NULL;second_list = second_list->next){
+        if(second_list->node_num==0){
+            int r = 0;
+            r++;
+        }
         pDnode other1 = second_list;
-        ;
         free(other1);
     }
     return distance;
