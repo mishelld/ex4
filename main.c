@@ -5,45 +5,6 @@ int value = infinity;
 int len;
 pnode graph;
 
-/*void build_graph_cmd(pnode *head){
-   for (pnode ind_node = *head;ind_node != NULL;ind_node = ind_node->next){
-        if(ind_node->node_num==0){
-            int y = 0;
-            y++;
-        }
-       
-        for( pedge ind_edge = ind_node->edges;ind_edge != NULL; ind_edge = ind_edge->next){
-            if(ind_edge->endpoint->node_num==0){
-                int w = 0;
-                w++;
-            }
-            pedge other = ind_edge;
-           
-            free(other);
-        }
-        
-        pnode other = ind_node;
-        
-        free(other);
-    }
-    *head = NULL;
-
-    int len = 0;
-    int index = 0;
-    char c;
-    scanf("%d", &len);
-    scanf("%c", &c);
-    if(index==len){
-        int h =0;
-        h++;
-    }
-    while(index <= len-1){
-        scanf("%c", &c);
-        insert_node_cmd(head);
-        index++;
-    }
-}*/
-
 void check(int id){
     if(id < 0){
         printf("id = %d",id);
@@ -164,7 +125,7 @@ void insert_node_cmd(pnode *head){
         flag = scanf("%d", &destination);
     }
 }
-void delete_node_cmd(pnode *head){
+/*void delete_node_cmd(pnode *head){
     int flag = -1;
     scanf("%d", &flag);
     if(flag==0){
@@ -241,7 +202,7 @@ void delete_node_cmd(pnode *head){
         befor->next = delete->next;
         free(delete);
     }
-}
+}*/
 
 
 
@@ -566,8 +527,6 @@ int main(){
     char c = '\0';
     while (scanf("%c", &c) != EOF){
         if (c == 'A'){
-           // build_graph_cmd(node);
-
          for (pnode ind_node = *node;ind_node != NULL;ind_node = ind_node->next){
         if(ind_node->node_num==0){
             int y = 0;
@@ -607,10 +566,91 @@ int main(){
 //
         }
         else if (c == 'B'){
-            insert_node_cmd(node);
+         insert_node_cmd(node);
+
+           //
         }
         else if (c == 'D'){
-            delete_node_cmd(node);
+           // delete_node_cmd(node);
+           int flag = -1;
+    scanf("%d", &flag);
+    if(flag==0){
+        int y =0;
+        y++;
+    }
+    pnode befor = NULL;
+    for (pnode ind_node = *node;ind_node != NULL;ind_node = ind_node->next){
+        if(flag==1){
+            int h = 0;
+            h++;
+        }
+        if (ind_node->next != NULL){
+            if(ind_node->next->node_num == flag){
+            befor = ind_node;
+            }
+        }
+        if (ind_node->edges != NULL){
+            if(ind_node->edges->endpoint->node_num == flag){
+            pedge other = ind_node->edges;
+            if(flag ==1){
+                int g =0;
+                g++;
+            }
+            ind_node->edges = ind_node->edges->next;
+            free(other);
+            if(ind_node->node_num==0){
+                int y = 0;
+                y++;
+            }
+            continue;
+            }
+        }
+        pedge ind_edge = ind_node->edges;
+        if (ind_edge != NULL){
+            while (ind_edge->next != NULL){
+                if(ind_edge->endpoint->node_num==0){
+                    int r = 0;
+                    r++;
+                }
+                if (ind_edge->next->endpoint->node_num == flag){
+                    pedge temp = ind_edge->next;
+
+                    ind_edge->next = temp->next;
+                    free(temp);
+                }
+                else{
+                    ind_edge = ind_edge->next;
+                }
+                if(ind_edge->endpoint->node_num==2){
+                    int g = 0;
+                    g++;
+                }
+            }
+        }
+        ind_node = ind_node->next;
+    }
+    if (befor != NULL){
+        pnode delete = befor->next;
+        if(befor->node_num==0){
+            int h = 0;
+            h++;
+        }
+        pedge ind_edge = delete->edges;
+        for (;ind_edge != NULL;ind_edge = ind_edge->next){
+            if(ind_edge->endpoint->node_num==1){
+                int e = 0;
+                e++;
+            }
+            pedge other = ind_edge;
+            
+            free(other);
+        }
+        befor->next = delete->next;
+        free(delete);
+    }
+
+        
+           //
         }
         else if (c == 'S'){
             int source = -1, dest = -1;
