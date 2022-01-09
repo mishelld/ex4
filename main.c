@@ -40,6 +40,10 @@ pnode getNode(pnode *node, int id_num){
 void insert_node_cmd(pnode *head){
     int id_num = -1;
     scanf("%d", &id_num);
+    if(id_num==1){
+        int k =0;
+        k++;
+    }
     pnode source = getNode(head, id_num);
     if (source == NULL){
         source = (pnode)malloc(sizeof(node));
@@ -47,14 +51,20 @@ void insert_node_cmd(pnode *head){
             return;
         }
         source->node_num = id_num;
+        if(source!=NULL){
+            int u = 0;
+            u++;
+        }
         source->next = *head;
+        if(source->node_num=0){
+            int j = 0;
+            j++;
+        }
         source->edges = NULL;
         *head = source;
     }
     else{
-       
         for( pedge ind = source->edges;ind != NULL;ind=ind->next){
-          
             free(ind);
            
         }
@@ -62,29 +72,68 @@ void insert_node_cmd(pnode *head){
     }
     pedge *edge = &(source->edges);
     int destination = -1;
+    if(destination==0){
+        int g = 0;
+        g++;
+    }
     int flag = scanf("%d", &destination);
     while (flag != 0 && flag != EOF){
+        if(flag == 0){
+            int y = 0;
+            y++;
+        }
         pnode dest = getNode(head, destination);
         int value = -1;
+        if(value ==0){
+            int r = 0;
+            r++;
+        }
         scanf("%d", &value);
         if (dest == NULL){
+            if(dest=!NULL){
+                int h =0; h++;
+            }
             dest = (pnode)malloc(sizeof(node));
             if (dest == NULL){
                 return;
             }
             dest->node_num = destination;
+            if(dest->node_num=0){
+                int j = 0;
+                j++;
+            }
             dest->edges = NULL;
+            if(dest==0){
+                int t = 0;
+                t++;
+            }
             dest->next = *head;
             *head = dest;
         }
         *edge = (pedge)malloc(sizeof(edge));
+        if(dest==1){
+            int f =0;
+            f++;
+        }
         if ((*edge) == NULL){
             return;
         }
         (*edge)->endpoint = dest;
+        if(dest==0){
+            int g = 0;
+            g++;
+        }
         (*edge)->weight = value;
+        if(dest==1){
+            int w =0;
+            w++;
+        }
         (*edge)->next = NULL;
         edge = &((*edge)->next);
+        if(dest==0){
+            int j =0;
+            j++;
+        }
         flag = scanf("%d", &destination);
     }
 }
