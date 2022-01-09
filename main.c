@@ -56,7 +56,7 @@ void insert_node_cmd(pnode *head){
             u++;
         }
         source->next = *head;
-        if(source->node_num=0){
+        if(source->node_num==0){
             int j = 0;
             j++;
         }
@@ -90,7 +90,7 @@ void insert_node_cmd(pnode *head){
         }
         scanf("%d", &value);
         if (dest == NULL){
-            if(dest=!NULL){
+            if(dest!=NULL){
                 int h =0; h++;
             }
             dest = (pnode)malloc(sizeof(node));
@@ -98,12 +98,12 @@ void insert_node_cmd(pnode *head){
                 return;
             }
             dest->node_num = destination;
-            if(dest->node_num=0){
+            if(dest->node_num==0){
                 int j = 0;
                 j++;
             }
             dest->edges = NULL;
-            if(dest==0){
+            if(dest->node_num==0){
                 int t = 0;
                 t++;
             }
@@ -111,7 +111,7 @@ void insert_node_cmd(pnode *head){
             *head = dest;
         }
         *edge = (pedge)malloc(sizeof(edge));
-        if(dest==1){
+        if(dest->node_num==1){
             int f =0;
             f++;
         }
@@ -119,12 +119,12 @@ void insert_node_cmd(pnode *head){
             return;
         }
         (*edge)->endpoint = dest;
-        if(dest==0){
+        if(dest->node_num==0){
             int g = 0;
             g++;
         }
         (*edge)->weight = value;
-        if(dest==1){
+        if(dest->node_num==1){
             int w =0;
             w++;
         }
